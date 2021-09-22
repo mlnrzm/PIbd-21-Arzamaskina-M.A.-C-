@@ -42,8 +42,8 @@ namespace Tipper_Variant2
         {
             Random rnd = new Random();
             car = new TipperCar();
-            car.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Yellow,
-           Color.Blue, true, true, true);
+            car.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
+           Color.Yellow, true, true, true);
             car.SetPosition(rnd.Next(50, 100),
            rnd.Next(50, 100), pictureBoxCars.Width, pictureBoxCars.Height);
             Draw();

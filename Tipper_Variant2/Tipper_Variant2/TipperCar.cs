@@ -15,7 +15,7 @@ namespace Tipper_Variant2
         private float _startPosX;
 
         /// <summary>
-        /// Правая кооридната отрисовки автомобиля
+        /// Правая координата отрисовки автомобиля
         /// </summary>
         private float _startPosY;
 
@@ -65,9 +65,9 @@ namespace Tipper_Variant2
         public bool WheelRims { private set; get; }
 
         /// <summary>
-        /// Признак наличия лобового стекла
+        /// Признак наличия платформы самосвала 
         /// </summary>
-        public bool Windscreen { private set; get; }
+        public bool Platform { private set; get; }
 
         /// <summary>
         /// Признак наличия фар 
@@ -82,17 +82,17 @@ namespace Tipper_Variant2
         /// <param name="mainColor">Основной цвет</param>
         /// <param name="dopColor">Дополнительный цвет</param>
         /// <param name="wheelRims">Признак наличия колесных дисков</param>
-        /// <param name="windscreen">Признак наличия боковых спойлеров</param>
-        /// <param name="headlight ">Признак наличия заднего спойлера</param>
+        /// <param name="platform">Признак наличия платформы самосвала</param>
+        /// <param name="headlight ">Признак наличия фар</param>
         public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor,
-       bool wheelRims, bool windscreen, bool headlight)
+       bool wheelRims, bool platform, bool headlight)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
             WheelRims = wheelRims;
-            Windscreen = windscreen;
+            Platform = platform;
             Headlight = headlight;
         }
 
@@ -105,7 +105,6 @@ namespace Tipper_Variant2
         /// <param name="height">Высота картинки</param>
         public void SetPosition(int x, int y, int width, int height)
         {
-            // Продумать логику
             _startPosX = x;
             _startPosY = y;
             _pictureWidth = width;
@@ -164,22 +163,28 @@ namespace Tipper_Variant2
             {
                 Brush spoiler1 = new SolidBrush(MainColor);
                 //отрисовка платформы
-                g.DrawRectangle(pen, _startPosX, _startPosY + 40, 80, 15);
                 g.FillRectangle(spoiler1, _startPosX, _startPosY + 40, 80, 15);
+                g.DrawRectangle(pen, _startPosX, _startPosY + 40, 80, 15);
 
                 //отрисовка кабины
                 g.DrawRectangle(pen, _startPosX + 55, _startPosY, 25, 40);
                 g.FillRectangle(spoiler1, _startPosX + 55, _startPosY, 25, 40);
 
                 //отрисовка колес
-                g.DrawEllipse(pen, _startPosX, _startPosY + 55, 15, 15);
-                g.DrawEllipse(pen, _startPosX + 20, _startPosY + 55, 15, 15);
-                g.DrawEllipse(pen, _startPosX + 65, _startPosY + 55, 15, 15);
                 Brush spoiler = new SolidBrush(Color.Black);
                 g.FillEllipse(spoiler, _startPosX, _startPosY + 55, 15, 15);
                 g.FillEllipse(spoiler, _startPosX + 20, _startPosY + 55, 15, 15);
                 g.FillEllipse(spoiler, _startPosX + 65, _startPosY + 55, 15, 15);
+                g.DrawEllipse(pen, _startPosX, _startPosY + 55, 15, 15);
+                g.DrawEllipse(pen, _startPosX + 20, _startPosY + 55, 15, 15);
+                g.DrawEllipse(pen, _startPosX + 65, _startPosY + 55, 15, 15);
 
+                //отрисовка лобового стекла
+                Brush spoiler2 = new SolidBrush(Color.Gray);
+                g.FillRectangle(spoiler2, _startPosX + 65, _startPosY + 4, 15, 20);
+                g.DrawRectangle(pen, _startPosX + 65, _startPosY + 4, 15, 20);
+
+                //отрисовка колесных дисков
                 if (WheelRims)
                 {
                     Brush sp = new SolidBrush(Color.Gray);
@@ -188,21 +193,23 @@ namespace Tipper_Variant2
                     g.FillEllipse(sp, _startPosX + 70, _startPosY + 60, 5, 5);
                 }
 
-                //отрисовка лобового стекла
-                if (Windscreen)
+                //отприсовка платформы самосвала
+                if (Platform)
                 {
-                    Brush spoiler2 = new SolidBrush(DopColor);
-                    g.FillRectangle(spoiler2, _startPosX + 65, _startPosY + 4, 15, 20);
+                    Brush sp = new SolidBrush(DopColor);
+                    g.FillRectangle(sp, _startPosX, _startPosY + 10, 50, 30);
+                    g.DrawRectangle(pen, _startPosX, _startPosY + 10, 50, 30);
+
                 }
 
                 //отрисовка фар
                 if (Headlight)
                 {
-                    Brush spoiler0 = new SolidBrush(Color.Red);
+                    Brush sp = new SolidBrush(Color.Red);
+                    g.FillRectangle(sp, _startPosX + 70, _startPosY + 45, 10, 5);
+                    g.FillRectangle(sp, _startPosX, _startPosY + 45, 10, 5);
                     g.DrawRectangle(pen, _startPosX + 70, _startPosY + 45, 10, 5);
-                    g.FillRectangle(spoiler0, _startPosX + 70, _startPosY + 45, 10, 5);
                     g.DrawRectangle(pen, _startPosX, _startPosY + 45, 10, 5);
-                    g.FillRectangle(spoiler0, _startPosX, _startPosY + 45, 10, 5);
                 }
             }
 
