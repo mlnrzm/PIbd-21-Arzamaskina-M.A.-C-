@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Tipper_Variant2
 {
-    interface ITransport
+    public interface ITransport
     {
         /// <summary>
         /// Установка позиции
