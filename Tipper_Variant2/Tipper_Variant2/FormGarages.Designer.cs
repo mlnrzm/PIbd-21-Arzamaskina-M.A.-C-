@@ -32,9 +32,14 @@
             this.buttonParkingTruck = new System.Windows.Forms.Button();
             this.buttonParkingTipper = new System.Windows.Forms.Button();
             this.groupBoxTakeTruck = new System.Windows.Forms.GroupBox();
-            this.numberGarage = new System.Windows.Forms.MaskedTextBox();
-            this.labelGarage = new System.Windows.Forms.Label();
             this.buttonTake = new System.Windows.Forms.Button();
+            this.labelGarage = new System.Windows.Forms.Label();
+            this.numberGarage = new System.Windows.Forms.MaskedTextBox();
+            this.labelGarages = new System.Windows.Forms.Label();
+            this.textBoxGarages = new System.Windows.Forms.TextBox();
+            this.buttonAddGarage = new System.Windows.Forms.Button();
+            this.listBoxGarages = new System.Windows.Forms.ListBox();
+            this.buttonDeleteGarages = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGarages)).BeginInit();
             this.groupBoxTakeTruck.SuspendLayout();
             this.SuspendLayout();
@@ -49,9 +54,9 @@
             // 
             // buttonParkingTruck
             // 
-            this.buttonParkingTruck.Location = new System.Drawing.Point(687, 27);
+            this.buttonParkingTruck.Location = new System.Drawing.Point(690, 328);
             this.buttonParkingTruck.Name = "buttonParkingTruck";
-            this.buttonParkingTruck.Size = new System.Drawing.Size(240, 42);
+            this.buttonParkingTruck.Size = new System.Drawing.Size(237, 36);
             this.buttonParkingTruck.TabIndex = 1;
             this.buttonParkingTruck.Text = "Припарковать грузовик";
             this.buttonParkingTruck.UseVisualStyleBackColor = true;
@@ -59,9 +64,9 @@
             // 
             // buttonParkingTipper
             // 
-            this.buttonParkingTipper.Location = new System.Drawing.Point(687, 75);
+            this.buttonParkingTipper.Location = new System.Drawing.Point(690, 370);
             this.buttonParkingTipper.Name = "buttonParkingTipper";
-            this.buttonParkingTipper.Size = new System.Drawing.Size(240, 36);
+            this.buttonParkingTipper.Size = new System.Drawing.Size(237, 36);
             this.buttonParkingTipper.TabIndex = 2;
             this.buttonParkingTipper.Text = "Припарковать самосвал";
             this.buttonParkingTipper.UseVisualStyleBackColor = true;
@@ -72,28 +77,12 @@
             this.groupBoxTakeTruck.Controls.Add(this.buttonTake);
             this.groupBoxTakeTruck.Controls.Add(this.labelGarage);
             this.groupBoxTakeTruck.Controls.Add(this.numberGarage);
-            this.groupBoxTakeTruck.Location = new System.Drawing.Point(689, 138);
+            this.groupBoxTakeTruck.Location = new System.Drawing.Point(690, 425);
             this.groupBoxTakeTruck.Name = "groupBoxTakeTruck";
             this.groupBoxTakeTruck.Size = new System.Drawing.Size(237, 122);
             this.groupBoxTakeTruck.TabIndex = 3;
             this.groupBoxTakeTruck.TabStop = false;
             this.groupBoxTakeTruck.Text = "Забрать грузовик/самосвал";
-            // 
-            // numberGarage
-            // 
-            this.numberGarage.Location = new System.Drawing.Point(94, 41);
-            this.numberGarage.Name = "numberGarage";
-            this.numberGarage.Size = new System.Drawing.Size(51, 22);
-            this.numberGarage.TabIndex = 0;
-            // 
-            // labelGarage
-            // 
-            this.labelGarage.AutoSize = true;
-            this.labelGarage.Location = new System.Drawing.Point(24, 46);
-            this.labelGarage.Name = "labelGarage";
-            this.labelGarage.Size = new System.Drawing.Size(53, 17);
-            this.labelGarage.TabIndex = 1;
-            this.labelGarage.Text = "Гараж:";
             // 
             // buttonTake
             // 
@@ -105,11 +94,78 @@
             this.buttonTake.UseVisualStyleBackColor = true;
             this.buttonTake.Click += new System.EventHandler(this.buttonTake_Click);
             // 
+            // labelGarage
+            // 
+            this.labelGarage.AutoSize = true;
+            this.labelGarage.Location = new System.Drawing.Point(24, 46);
+            this.labelGarage.Name = "labelGarage";
+            this.labelGarage.Size = new System.Drawing.Size(53, 17);
+            this.labelGarage.TabIndex = 1;
+            this.labelGarage.Text = "Гараж:";
+            // 
+            // numberGarage
+            // 
+            this.numberGarage.Location = new System.Drawing.Point(94, 41);
+            this.numberGarage.Name = "numberGarage";
+            this.numberGarage.Size = new System.Drawing.Size(51, 22);
+            this.numberGarage.TabIndex = 0;
+            // 
+            // labelGarages
+            // 
+            this.labelGarages.AutoSize = true;
+            this.labelGarages.Location = new System.Drawing.Point(778, 25);
+            this.labelGarages.Name = "labelGarages";
+            this.labelGarages.Size = new System.Drawing.Size(57, 17);
+            this.labelGarages.TabIndex = 4;
+            this.labelGarages.Text = "Гаражи";
+            // 
+            // textBoxGarages
+            // 
+            this.textBoxGarages.Location = new System.Drawing.Point(691, 45);
+            this.textBoxGarages.Name = "textBoxGarages";
+            this.textBoxGarages.Size = new System.Drawing.Size(236, 22);
+            this.textBoxGarages.TabIndex = 5;
+            // 
+            // buttonAddGarage
+            // 
+            this.buttonAddGarage.Location = new System.Drawing.Point(691, 73);
+            this.buttonAddGarage.Name = "buttonAddGarage";
+            this.buttonAddGarage.Size = new System.Drawing.Size(237, 36);
+            this.buttonAddGarage.TabIndex = 6;
+            this.buttonAddGarage.Text = "Добавить парковку (гараж)";
+            this.buttonAddGarage.UseVisualStyleBackColor = true;
+            this.buttonAddGarage.Click += new System.EventHandler(this.buttonAddGarage_Click);
+            // 
+            // listBoxGarages
+            // 
+            this.listBoxGarages.FormattingEnabled = true;
+            this.listBoxGarages.ItemHeight = 16;
+            this.listBoxGarages.Location = new System.Drawing.Point(690, 141);
+            this.listBoxGarages.Name = "listBoxGarages";
+            this.listBoxGarages.Size = new System.Drawing.Size(235, 116);
+            this.listBoxGarages.TabIndex = 7;
+            this.listBoxGarages.SelectedIndexChanged += new System.EventHandler(this.listBoxGarages_SelectedIndexChanged);
+            // 
+            // buttonDeleteGarages
+            // 
+            this.buttonDeleteGarages.Location = new System.Drawing.Point(690, 263);
+            this.buttonDeleteGarages.Name = "buttonDeleteGarages";
+            this.buttonDeleteGarages.Size = new System.Drawing.Size(237, 36);
+            this.buttonDeleteGarages.TabIndex = 8;
+            this.buttonDeleteGarages.Text = "Удалить парковку (гаражи)";
+            this.buttonDeleteGarages.UseVisualStyleBackColor = true;
+            this.buttonDeleteGarages.Click += new System.EventHandler(this.buttonDeleteGarages_Click);
+            // 
             // FormGarages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 571);
+            this.Controls.Add(this.buttonDeleteGarages);
+            this.Controls.Add(this.listBoxGarages);
+            this.Controls.Add(this.buttonAddGarage);
+            this.Controls.Add(this.textBoxGarages);
+            this.Controls.Add(this.labelGarages);
             this.Controls.Add(this.groupBoxTakeTruck);
             this.Controls.Add(this.buttonParkingTipper);
             this.Controls.Add(this.buttonParkingTruck);
@@ -120,6 +176,7 @@
             this.groupBoxTakeTruck.ResumeLayout(false);
             this.groupBoxTakeTruck.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -132,5 +189,10 @@
         private System.Windows.Forms.Button buttonTake;
         private System.Windows.Forms.Label labelGarage;
         private System.Windows.Forms.MaskedTextBox numberGarage;
+        private System.Windows.Forms.Label labelGarages;
+        private System.Windows.Forms.TextBox textBoxGarages;
+        private System.Windows.Forms.Button buttonAddGarage;
+        private System.Windows.Forms.ListBox listBoxGarages;
+        private System.Windows.Forms.Button buttonDeleteGarages;
     }
 }
