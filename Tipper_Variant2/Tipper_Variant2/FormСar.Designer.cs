@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pictureBoxCars = new System.Windows.Forms.PictureBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonCreateTruck = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
@@ -49,15 +49,15 @@
             this.pictureBoxCars.TabIndex = 0;
             this.pictureBoxCars.TabStop = false;
             // 
-            // buttonCreate
+            // buttonCreateTruck
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(12, 12);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(178, 37);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать грузовик";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            this.buttonCreateTruck.Location = new System.Drawing.Point(12, 12);
+            this.buttonCreateTruck.Name = "buttonCreateTruck";
+            this.buttonCreateTruck.Size = new System.Drawing.Size(178, 37);
+            this.buttonCreateTruck.TabIndex = 1;
+            this.buttonCreateTruck.Text = "Создать грузовик";
+            this.buttonCreateTruck.UseVisualStyleBackColor = true;
+            this.buttonCreateTruck.Click += new System.EventHandler(this.buttonCreateTruck_Click);
             // 
             // buttonRight
             // 
@@ -115,7 +115,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Создать самосвал";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.buttonCreateTipperCar_Click);
             // 
             // FormCar
             // 
@@ -127,7 +127,7 @@
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonRight);
-            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonCreateTruck);
             this.Controls.Add(this.pictureBoxCars);
             this.Name = "FormCar";
             this.Text = "Tipper";
@@ -139,7 +139,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxCars;
-        private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.Button buttonCreateTruck;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonLeft;

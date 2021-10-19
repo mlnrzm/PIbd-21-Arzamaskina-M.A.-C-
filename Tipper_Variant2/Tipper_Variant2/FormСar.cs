@@ -49,11 +49,11 @@ namespace Tipper_Variant2
         }
 
         /// <summary>
-        /// Обработка нажатия кнопки "Создать"
+        /// Обработка нажатия кнопки "Создать грузовик"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonCreate_Click_1(object sender, EventArgs e)
+        private void buttonCreateTruck_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
             car = new Truck(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);
@@ -63,7 +63,7 @@ namespace Tipper_Variant2
         }
 
         /// <summary>
-        /// Обработка нажатия кнопки "Создать гоночный автомобиль"
+        /// Обработка нажатия кнопки "Создать самосвал"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
