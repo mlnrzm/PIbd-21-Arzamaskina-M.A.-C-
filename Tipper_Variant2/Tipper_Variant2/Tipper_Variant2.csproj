@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
+    <Compile Include="FormGarages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGarages.Designer.cs">
+      <DependentUpon>FormGarages.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormСar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     <Compile Include="TipperCar.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
+    <EmbeddedResource Include="FormGarages.resx">
+      <DependentUpon>FormGarages.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormСar.resx">
       <DependentUpon>FormСar.cs</DependentUpon>
     </EmbeddedResource>
