@@ -45,6 +45,7 @@ namespace Tipper_Variant2
          /// <param name="name">Название парковки (гаража)</param>
          public void AddGarage(string name)
          {
+            if(!garageStages.ContainsKey(name))
             garageStages.Add(name, new Garage<Vehicle>(pictureWidth, pictureHeight));
          }
          /// <summary>
@@ -53,18 +54,28 @@ namespace Tipper_Variant2
          /// <param name="name">Название парковки (гаража)</param>
          public void DelGarage(string name)
          {
-            garageStages.Remove(name);
-        }
+            if (garageStages.ContainsKey(name))
+                garageStages.Remove(name);
+         }
          /// <summary>
          /// Доступ к парковке (гаражам)
          /// </summary>
          /// <param name="ind"></param>
          /// <returns></returns>
          public Garage<Vehicle> this[string ind]
-         {
-            // Продумать логику для индексатора
-            get { return garageStages[ind]; }
-            set { garageStages[ind] = value; }
+        {
+            get 
+            {
+                if (garageStages.ContainsKey(ind))
+                    return garageStages[ind];
+                else
+                    return null;
+            }
+            set 
+            {
+                if (garageStages.ContainsKey(ind))
+                    garageStages[ind] = value; 
+            }
          }
     }
 }
