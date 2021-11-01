@@ -60,6 +60,7 @@
       <DependentUpon>FormСar.cs</DependentUpon>
     </Compile>
     <Compile Include="Garage.cs" />
+    <Compile Include="GarageCollection.cs" />
     <Compile Include="ITransport.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

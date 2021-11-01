@@ -15,9 +15,13 @@ namespace Tipper_Variant2
         where T : class, ITransport
     {
         /// <summary>
-        /// Массив объектов, которые храним
+        /// Список объектов, которые храним
         /// </summary>
-        private readonly T[] _garages;
+        private readonly List<T> _garages;
+        /// <summary>
+        /// Максимальное количество гаражей
+        /// </summary>
+        private readonly int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -43,7 +47,8 @@ namespace Tipper_Variant2
         {
             int width = picWidth / _garageSizeWidth;
             int height = picHeight / _garageSizeHeight;
-            _garages = new T[width * height];
+            _maxCount = width * height;
+            _garages = new List<T>();
             pictureWidth = picWidth;
             pictureHeight = picHeight;
         }
@@ -57,14 +62,10 @@ namespace Tipper_Variant2
         public static int operator +(Garage<T> p, T car)
         {
             int add_car = -1;
-            for (int i = 0; i < p._garages.Length; i++)
+            if(p._garages.Count < p._maxCount)
             {
-                if (p._garages[i] == null)
-                {
-                    p._garages[i] = car;
-                    add_car = i;
-                    break;
-                }
+                    p._garages.Add(car);
+                    add_car = p._garages.Count;
             }
             return add_car;
         }
@@ -78,10 +79,10 @@ namespace Tipper_Variant2
         public static T operator -(Garage<T> p, int index)
         {
             T t = null;
-            if ((index > -1) && (index < p._garages.Length) && (p._garages[index] != null))
+            if ((index > -1) && (index < p._garages.Count))
             {
                 t = p._garages[index];
-                p._garages[index] = null;
+                p._garages.RemoveAt(index);
             }
             return t;
         }
@@ -92,7 +93,7 @@ namespace Tipper_Variant2
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _garages.Length; i++)
+            for (int i = 0; i < _garages.Count; i++)
             {
                 _garages[i]?.SetPosition(5 + (i % (pictureWidth / _garageSizeWidth)) * _garageSizeWidth,
                     (i / (pictureWidth / _garageSizeWidth)) * _garageSizeHeight + 25, pictureWidth, pictureHeight);
