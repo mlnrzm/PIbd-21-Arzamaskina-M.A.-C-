@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.pictureBoxGarages = new System.Windows.Forms.PictureBox();
-            this.buttonParkingTruck = new System.Windows.Forms.Button();
-            this.buttonParkingTipper = new System.Windows.Forms.Button();
+            this.buttonSetTruckOrTipper = new System.Windows.Forms.Button();
             this.groupBoxTakeTruck = new System.Windows.Forms.GroupBox();
             this.buttonTake = new System.Windows.Forms.Button();
             this.labelGarage = new System.Windows.Forms.Label();
@@ -52,25 +51,15 @@
             this.pictureBoxGarages.TabIndex = 0;
             this.pictureBoxGarages.TabStop = false;
             // 
-            // buttonParkingTruck
+            // buttonSetTruckOrTipper
             // 
-            this.buttonParkingTruck.Location = new System.Drawing.Point(690, 328);
-            this.buttonParkingTruck.Name = "buttonParkingTruck";
-            this.buttonParkingTruck.Size = new System.Drawing.Size(237, 36);
-            this.buttonParkingTruck.TabIndex = 1;
-            this.buttonParkingTruck.Text = "Припарковать грузовик";
-            this.buttonParkingTruck.UseVisualStyleBackColor = true;
-            this.buttonParkingTruck.Click += new System.EventHandler(this.buttonParkingTruck_Click);
-            // 
-            // buttonParkingTipper
-            // 
-            this.buttonParkingTipper.Location = new System.Drawing.Point(690, 370);
-            this.buttonParkingTipper.Name = "buttonParkingTipper";
-            this.buttonParkingTipper.Size = new System.Drawing.Size(237, 36);
-            this.buttonParkingTipper.TabIndex = 2;
-            this.buttonParkingTipper.Text = "Припарковать самосвал";
-            this.buttonParkingTipper.UseVisualStyleBackColor = true;
-            this.buttonParkingTipper.Click += new System.EventHandler(this.buttonParkingTipper_Click);
+            this.buttonSetTruckOrTipper.Location = new System.Drawing.Point(690, 370);
+            this.buttonSetTruckOrTipper.Name = "buttonSetTruckOrTipper";
+            this.buttonSetTruckOrTipper.Size = new System.Drawing.Size(237, 36);
+            this.buttonSetTruckOrTipper.TabIndex = 2;
+            this.buttonSetTruckOrTipper.Text = "Добавить грузовик/самосвал";
+            this.buttonSetTruckOrTipper.UseVisualStyleBackColor = true;
+            this.buttonSetTruckOrTipper.Click += new System.EventHandler(this.buttonSetTruckOrTipper_Click);
             // 
             // groupBoxTakeTruck
             // 
@@ -167,8 +156,7 @@
             this.Controls.Add(this.textBoxGarages);
             this.Controls.Add(this.labelGarages);
             this.Controls.Add(this.groupBoxTakeTruck);
-            this.Controls.Add(this.buttonParkingTipper);
-            this.Controls.Add(this.buttonParkingTruck);
+            this.Controls.Add(this.buttonSetTruckOrTipper);
             this.Controls.Add(this.pictureBoxGarages);
             this.Name = "FormGarages";
             this.Text = "Гаражи";
@@ -183,8 +171,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxGarages;
-        private System.Windows.Forms.Button buttonParkingTruck;
-        private System.Windows.Forms.Button buttonParkingTipper;
+        private System.Windows.Forms.Button buttonSetTruckOrTipper;
         private System.Windows.Forms.GroupBox groupBoxTakeTruck;
         private System.Windows.Forms.Button buttonTake;
         private System.Windows.Forms.Label labelGarage;
