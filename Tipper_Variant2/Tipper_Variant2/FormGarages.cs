@@ -63,61 +63,6 @@ namespace Tipper_Variant2
         }
 
         /// <summary>
-        /// Обработка нажатия кнопки "Припарковать грузовик"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonParkingTruck_Click(object sender, EventArgs e)
-        {
-            if (listBoxGarages.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var car = new Truck(100, 1000, dialog.Color);
-                    if ((garageCollection[listBoxGarages.SelectedItem.ToString()] + car) > -1)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Гараж переполнен");
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Обработка нажатия кнопки "Припарковать самосвал"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonParkingTipper_Click(object sender, EventArgs e)
-        {
-            if (listBoxGarages.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var car = new TipperCar(100, 1000, dialog.Color, dialogDop.Color,
-                       true, true, true);
-                        if ((garageCollection[listBoxGarages.SelectedItem.ToString()] + car) > -1)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Гараж переполнен");
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Обработка нажатия кнопки "Забрать"
         /// </summary>
         /// <param name="sender"></param>
@@ -183,6 +128,37 @@ namespace Tipper_Variant2
         private void listBoxGarages_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+
+        /// <summary>
+        /// Метод добавления машины
+        /// </summary>
+        /// <param name="car"></param>
+        private void AddCar(Vehicle car)
+        {
+            if (car != null && listBoxGarages.SelectedIndex > -1)
+            {
+                if ((garageCollection[listBoxGarages.SelectedItem.ToString()]) + car > -1)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Машину не удалось поставить");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обработка нажатия кнопки "Добавить грузовик/самосвал"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSetTruckOrTipper_Click(object sender, EventArgs e)
+        {
+            var formCarConfig = new FormCarConfig();
+            formCarConfig.AddEvent(AddCar);
+            formCarConfig.Show();
         }
     }
 }

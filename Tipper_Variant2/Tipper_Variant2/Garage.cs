@@ -52,6 +52,7 @@ namespace Tipper_Variant2
             pictureWidth = picWidth;
             pictureHeight = picHeight;
         }
+
         /// <summary>
         /// Перегрузка оператора сложения
         /// Логика действия: в гараж добавляется автомобиль
@@ -69,6 +70,7 @@ namespace Tipper_Variant2
             }
             return add_car;
         }
+
         /// <summary>
         /// Перегрузка оператора вычитания
         /// Логика действия: из гаража забираем автомобиль
@@ -86,6 +88,7 @@ namespace Tipper_Variant2
             }
             return t;
         }
+
         /// <summary>
         /// Метод отрисовки гаражей
         /// </summary>
