@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Globalization;
 
 namespace Tipper_Variant2
 {
@@ -47,6 +48,44 @@ namespace Tipper_Variant2
             WheelRims = wheelRims;
             Headlight = headlight;
             Platform = platform;
+        }
+
+        /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info"></param>
+        public TipperCar(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 7)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+
+                try
+                {
+                    int argb = Int32.Parse(strs[2], NumberStyles.HexNumber);
+                    MainColor = Color.FromArgb(argb);
+                }
+                catch (Exception ex)
+                {
+                    MainColor = Color.FromName(strs[2]);
+                }
+
+                try
+                {
+                    int argb = Int32.Parse(strs[3], NumberStyles.HexNumber);
+                    DopColor = Color.FromArgb(argb);
+                }
+                catch (Exception ex)
+                {
+                    DopColor = Color.FromName(strs[3]);
+                }
+
+                WheelRims = Convert.ToBoolean(strs[4]);
+                Headlight = Convert.ToBoolean(strs[5]);
+                Platform = Convert.ToBoolean(strs[6]);
+            }
         }
 
         /// <summary>
@@ -101,6 +140,12 @@ namespace Tipper_Variant2
         public void SetDopColor(Color color)
         {
             DopColor = color;
+        }
+
+        public override string ToString()
+        {
+            return
+           $"{base.ToString()}{separator}{DopColor.Name}{separator}{WheelRims}{separator}{Headlight}{separator}{Platform}";
         }
 
 
