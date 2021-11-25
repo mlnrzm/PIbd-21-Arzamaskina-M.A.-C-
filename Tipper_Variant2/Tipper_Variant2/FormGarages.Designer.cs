@@ -39,15 +39,15 @@
             this.buttonAddGarage = new System.Windows.Forms.Button();
             this.listBoxGarages = new System.Windows.Forms.ListBox();
             this.buttonDeleteGarages = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuSaveUpload = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGarages)).BeginInit();
             this.groupBoxTakeTruck.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuSaveUpload.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxGarages
@@ -152,16 +152,16 @@
             this.buttonDeleteGarages.UseVisualStyleBackColor = true;
             this.buttonDeleteGarages.Click += new System.EventHandler(this.buttonDeleteGarages_Click);
             // 
-            // menuStrip1
+            // menuSaveUpload
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuSaveUpload.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuSaveUpload.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(946, 28);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuSaveUpload.Location = new System.Drawing.Point(0, 0);
+            this.menuSaveUpload.Name = "menuSaveUpload";
+            this.menuSaveUpload.Size = new System.Drawing.Size(946, 28);
+            this.menuSaveUpload.TabIndex = 9;
+            this.menuSaveUpload.Text = "menuStrip1";
             // 
             // файлToolStripMenuItem
             // 
@@ -175,25 +175,25 @@
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // загрузитьToolStripMenuItem
             // 
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.загрузитьToolStripMenuItem.Text = "Загрузить";
             this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
             // 
-            // saveFileDialog1
+            // saveFileDialog
             // 
-            this.saveFileDialog1.Filter = "txt file | *.txt";
+            this.saveFileDialog.Filter = "txt file | *.txt";
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "txt file | *.txt";
+            this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.Filter = "txt file | *.txt";
             // 
             // FormGarages
             // 
@@ -208,15 +208,15 @@
             this.Controls.Add(this.groupBoxTakeTruck);
             this.Controls.Add(this.buttonSetTruckOrTipper);
             this.Controls.Add(this.pictureBoxGarages);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuSaveUpload);
+            this.MainMenuStrip = this.menuSaveUpload;
             this.Name = "FormGarages";
             this.Text = "Гаражи";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGarages)).EndInit();
             this.groupBoxTakeTruck.ResumeLayout(false);
             this.groupBoxTakeTruck.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuSaveUpload.ResumeLayout(false);
+            this.menuSaveUpload.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,11 +235,11 @@
         private System.Windows.Forms.Button buttonAddGarage;
         private System.Windows.Forms.ListBox listBoxGarages;
         private System.Windows.Forms.Button buttonDeleteGarages;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuSaveUpload;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

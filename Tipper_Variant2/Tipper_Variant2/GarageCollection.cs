@@ -85,16 +85,6 @@ namespace Tipper_Variant2
             }
          }
         /// <summary>
-        /// Метод записи информации в файл
-        /// </summary>
-        /// <param name="text">Строка, которую следует записать</param>
-        /// <param name="stream">Поток для записи</param>
-        private void WriteToFile(string text, FileStream stream)
-        {
-            byte[] info = new UTF8Encoding(true).GetBytes(text);
-            stream.Write(info, 0, info.Length);
-        }
-        /// <summary>
         /// Сохранение информации по автомобилям на парковках в файл
         /// </summary>
         /// <param name="filename">Путь и имя файла</param>
@@ -105,12 +95,13 @@ namespace Tipper_Variant2
             {
                 File.Delete(filename);
             }
-
+            
             using (StreamWriter SW = new StreamWriter(filename)) 
             {
                 SW.WriteLine($"GarageCollection");
                 foreach (var level in garageStages)
                 {
+                    
                     SW.WriteLine($"Garage{separator}{level.Key}");
                     ITransport car = null;
                     for (int i = 0; (car = level.Value.GetNext(i)) != null; i++)
@@ -134,7 +125,6 @@ namespace Tipper_Variant2
             }
                 return true;
         }
-
         /// <summary>
         /// Загрузка информации по автомобилям на парковках из файла
         /// </summary>
