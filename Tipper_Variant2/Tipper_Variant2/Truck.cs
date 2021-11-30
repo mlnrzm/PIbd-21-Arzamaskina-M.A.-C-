@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Globalization;
 
 namespace Tipper_Variant2
 {
@@ -18,6 +19,11 @@ namespace Tipper_Variant2
         /// </summary>
         protected readonly int carHeight = 70;
         /// <summary>
+        /// Разделитель для записи информации по объекту в файл
+        /// </summary>
+        protected readonly char separator = ';';
+
+        /// <summary>
         /// Конструктор с изменением размеров машины
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
@@ -28,6 +34,30 @@ namespace Tipper_Variant2
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+        }
+
+        /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public Truck(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+
+                try
+                {
+                    int argb = Int32.Parse(strs[2], NumberStyles.HexNumber);
+                    MainColor = Color.FromArgb(argb);
+                }
+                catch(Exception ex)
+                {
+                    MainColor = Color.FromName(strs[2]);
+                }
+            }
         }
 
         /// <summary>
@@ -113,6 +143,12 @@ namespace Tipper_Variant2
 
             }
         }
+
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+
 
     }
 }

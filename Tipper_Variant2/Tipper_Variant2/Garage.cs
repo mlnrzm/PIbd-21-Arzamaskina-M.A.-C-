@@ -135,6 +135,21 @@ namespace Tipper_Variant2
                (pictureHeight / _garageSizeHeight) * _garageSizeHeight);
             }
         }
+
+        /// <summary>
+        /// Функция получения элементы из списка
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public T GetNext(int index)
+        {
+            if (index < 0 || index >= _garages.Count)
+            {
+                return null;
+            }
+            return _garages[index];
+        }
+
     }
 
 }
