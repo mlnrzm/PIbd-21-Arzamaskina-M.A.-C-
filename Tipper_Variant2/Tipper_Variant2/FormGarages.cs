@@ -213,6 +213,8 @@ namespace Tipper_Variant2
             {
                 try
                 {
+                    garageCollection.LoadData(openFileDialog.FileName);
+                    garageCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                     logger.Info("Сохранено в файл " + saveFileDialog.FileName);
@@ -242,11 +244,6 @@ namespace Tipper_Variant2
                     ReloadLevels();
                     Draw();
                 }
-                /*catch (ParkingOccupiedPlaceException ex)
-                {
-                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }*/
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
