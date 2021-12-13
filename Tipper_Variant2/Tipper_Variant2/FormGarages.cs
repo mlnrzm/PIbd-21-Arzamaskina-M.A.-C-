@@ -213,8 +213,7 @@ namespace Tipper_Variant2
             {
                 try
                 {
-                    garageCollection.LoadData(openFileDialog.FileName);
-                    garageCollection.LoadData(openFileDialog.FileName);
+                    garageCollection.SaveData(openFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                     logger.Info("Сохранено в файл " + saveFileDialog.FileName);
