@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NLog;
 
 namespace Tipper_Variant2
 {
@@ -17,11 +18,17 @@ namespace Tipper_Variant2
         /// </summary>
         private readonly GarageCollection garageCollection;
 
+        /// <summary>
+        /// Логгер
+        /// </summary>
+        private readonly Logger logger;
+
         public FormGarages()
         {
             InitializeComponent();
             garageCollection = new GarageCollection(pictureBoxGarages.Width,
                 pictureBoxGarages.Height);
+            logger = LogManager.GetCurrentClassLogger();
             Draw();
         }
         /// <summary>
@@ -70,18 +77,33 @@ namespace Tipper_Variant2
         private void buttonTake_Click(object sender, EventArgs e)
         {
             if (listBoxGarages.SelectedIndex > -1 && numberGarage.Text != "")
-                if (numberGarage.Text != "")
+            {
+                try
                 {
-                    var car = garageCollection[listBoxGarages.SelectedItem.ToString()] - 
+                    var car = garageCollection[listBoxGarages.SelectedItem.ToString()] -
                         Convert.ToInt32(numberGarage.Text);
                     if (car != null)
                     {
                         FormCar form = new FormCar();
                         form.SetCar(car);
                         form.ShowDialog();
+                        logger.Info($"Изъят автомобиль {car} с места { numberGarage.Text}");
+                        Draw();
                     }
-                    Draw();
                 }
+                catch (ParkingNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                    logger.Warn($"Автомобиль на месте { numberGarage.Text} не найден.");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn($"Автомобиль на месте { numberGarage.Text} не найден.");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         /// <summary>
@@ -97,6 +119,7 @@ namespace Tipper_Variant2
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            logger.Info($"Добавили парковку {textBoxGarages.Text}");
             garageCollection.AddGarage(textBoxGarages.Text);
             ReloadLevels();
         }
@@ -113,6 +136,7 @@ namespace Tipper_Variant2
                 if (MessageBox.Show($"Удалить парковку (гаражи) { listBoxGarages.SelectedItem.ToString()}?", 
                     "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info($"Удалили парковку { listBoxGarages.SelectedItem.ToString()}");
                     garageCollection.DelGarage(textBoxGarages.Text);
                     ReloadLevels();
                 }
@@ -127,6 +151,8 @@ namespace Tipper_Variant2
         /// <param name="e"></param>
         private void listBoxGarages_SelectedIndexChanged(object sender, EventArgs e)
         {
+            logger.Info($"Перешли на парковку{ listBoxGarages.SelectedItem.ToString()}");
+
             Draw();
         }
 
@@ -137,16 +163,32 @@ namespace Tipper_Variant2
         private void AddCar(Vehicle car)
         {
             if (car != null && listBoxGarages.SelectedIndex > -1)
-            {
-                if ((garageCollection[listBoxGarages.SelectedItem.ToString()]) + car > -1)
+                try
                 {
+                        if ((garageCollection[listBoxGarages.SelectedItem.ToString()]) + car > -1)
+                        {
+                            Draw();
+                            logger.Info($"Добавлен автомобиль {car}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Машину не удалось поставить");
+                            logger.Warn($"Автомобиль {car} не удалось поставить");
+                        }
                     Draw();
                 }
-                else
+                catch (ParkingOverflowException ex)
                 {
-                    MessageBox.Show("Машину не удалось поставить");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                    logger.Warn($"Автомобиль {car} не удалось поставить. Парковка переполнена.");
                 }
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Info($"Автомобиль {car} не удалось поставить. Ошибка.");
+                }
         }
 
         /// <summary>
@@ -169,15 +211,17 @@ namespace Tipper_Variant2
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (garageCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
                     MessageBox.Show("Сохранение прошло успешно", "Результат",
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn("Ошибка при сохранении в файл " + saveFileDialog.FileName);
                 }
             }
         }
@@ -190,16 +234,24 @@ namespace Tipper_Variant2
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (garageCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    garageCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                /*catch (ParkingOccupiedPlaceException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
+                }*/
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Info("Ошибка загрузки из файла " + openFileDialog.FileName);
                 }
             }
         }

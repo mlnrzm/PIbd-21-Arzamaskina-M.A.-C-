@@ -63,7 +63,12 @@ namespace Tipper_Variant2
         public static int operator +(Garage<T> p, T car)
         {
             int add_car = -1;
-            if(p._garages.Count < p._maxCount)
+            if (p._garages.Count >= p._maxCount)
+            {
+                throw new ParkingOverflowException();
+            }
+
+            if (p._garages.Count < p._maxCount)
             {
                     p._garages.Add(car);
                     add_car = p._garages.Count;
@@ -81,6 +86,12 @@ namespace Tipper_Variant2
         public static T operator -(Garage<T> p, int index)
         {
             T t = null;
+
+            if (index < -1 || index > p._garages.Count || p._garages[index] == null)
+            {
+                throw new ParkingNotFoundException(index);
+            }
+
             if ((index > -1) && (index < p._garages.Count))
             {
                 t = p._garages[index];
