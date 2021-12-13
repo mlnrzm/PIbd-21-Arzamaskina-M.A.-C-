@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Tipper_Variant2
 {
     /// <summary>
@@ -32,6 +33,7 @@ namespace Tipper_Variant2
         /// Разделитель для записи информации в файл
         /// </summary>
         private readonly char separator = ':';
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -130,12 +132,13 @@ namespace Tipper_Variant2
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public bool LoadData(string filename)
+        public void LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
+
             string strTextFromFile = "";
             using (StreamReader SR = new StreamReader(filename, new UTF8Encoding(true)))
             {
@@ -154,7 +157,7 @@ namespace Tipper_Variant2
                         else
                         {
                             //если нет такой записи, то это не те данные
-                            return false;
+                            throw new FormatException("Неверный формат файла");
                         }
                         i++;
                     }
@@ -185,13 +188,12 @@ namespace Tipper_Variant2
                             var result = garageStages[key] + car;
                             if (result <= -1)
                             {
-                                return false;
+                                throw new IndexOutOfRangeException("Не удалось загрузить автомобиль на парковку");
                             }
                         }
                     }
                 }
             }
-            return true;
         }
 
     }
