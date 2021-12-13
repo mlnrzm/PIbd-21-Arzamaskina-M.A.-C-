@@ -105,28 +105,25 @@ namespace Tipper_Variant2
                 {
                     
                     SW.WriteLine($"Garage{separator}{level.Key}");
-                    ITransport car = null;
-                    for (int i = 0; (car = level.Value.GetNext(i)) != null; i++)
+                    //если место не пустое
+                    foreach (ITransport car in level.Value)
                     {
-                        if (car != null)
+                        //Записываем тип машины
+                        if (car.GetType().Name == "Truck")
                         {
-                            //если место не пустое
-                            //Записываем тип машины
-                            if (car.GetType().Name == "Truck")
-                            {
-                                SW.WriteLine($"Truck{separator}" + car);
-                            }
-                            if (car.GetType().Name == "TipperCar")
-                            {
-                                SW.WriteLine($"TipperCar{separator}" + car);
-                            }
-
+                            SW.WriteLine($"Truck{separator}" + car);
+                        }
+                        if (car.GetType().Name == "TipperCar")
+                        {
+                            SW.WriteLine($"TipperCar{separator}" + car);
                         }
                     }
+
                 }
             }
                 return true;
         }
+
         /// <summary>
         /// Загрузка информации по автомобилям на парковках из файла
         /// </summary>

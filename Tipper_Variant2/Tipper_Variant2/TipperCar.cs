@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace Tipper_Variant2
 {
-    public class TipperCar : Truck
+    public class TipperCar : Truck, IEquatable<TipperCar>
     {
         /// <summary>
         /// Дополнительный цвет
@@ -148,6 +148,61 @@ namespace Tipper_Variant2
            $"{base.ToString()}{separator}{DopColor.Name}{separator}{WheelRims}{separator}{Headlight}{separator}{Platform}";
         }
 
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса TipperCar
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(TipperCar other)
+        {
+            // Реализовать метод сравнения для дочернего класса
+            var res = (this as Truck).Equals(other as Truck);
+            if (!res)
+            {
+                return res;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (WheelRims != other.WheelRims)
+            {
+                return false;
+            }
+            if (Headlight != other.Headlight)
+            {
+                return false;
+            }
+            if (Platform != other.Platform)
+            {
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is TipperCar carObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(carObj);
+            }
+        }
 
     }
 }
