@@ -154,8 +154,7 @@ namespace Tipper_Variant2
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(TipperCar other)
-        {
-            // Реализовать метод сравнения для дочернего класса
+        {   
             var res = (this as Truck).Equals(other as Truck);
             if (!res)
             {
