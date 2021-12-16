@@ -183,6 +183,12 @@ namespace Tipper_Variant2
                    MessageBoxIcon.Error);
                     logger.Warn($"Автомобиль {car} не удалось поставить. Парковка переполнена.");
                 }
+                catch (ParkingAlreadyHaveException ex)
+                {
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                    logger.Warn($"Автомобиль {car} уже присутствует в одном из гаражей.");
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
@@ -250,6 +256,22 @@ namespace Tipper_Variant2
                     logger.Info("Ошибка загрузки из файла " + openFileDialog.FileName);
                 }
             }
+        }
+
+        /// <summary>
+        /// Обработка нажатия кнопки "Сортировка"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxGarages.SelectedIndex > -1)
+            {
+                garageCollection[listBoxGarages.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
+            }
+
         }
     }
 }

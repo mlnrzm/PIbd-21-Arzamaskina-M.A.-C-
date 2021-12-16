@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Tipper_Variant2
     /// Параметризованный класс для хранения набора объектов от интерфейса ITransport
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Garage<T>
+    public class Garage<T> : IEnumerator<T>, IEnumerable<T>
         where T : class, ITransport
     {
         /// <summary>
@@ -38,6 +39,15 @@ namespace Tipper_Variant2
         /// Размер места в гаражe (высота)
         /// </summary>
         private readonly int _garageSizeHeight = 100;
+
+        /// <summary>
+        /// Текущий элемент для вывода через IEnumerator (будет обращаться по своему 
+        /// индексу к ключу словаря, по которму будет возвращаться запись)
+        /// </summary>
+        private int _currentIndex;
+        public T Current => _garages[_currentIndex];
+        object IEnumerator.Current => _garages[_currentIndex];
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -51,6 +61,7 @@ namespace Tipper_Variant2
             _garages = new List<T>();
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _currentIndex = -1;
         }
 
         /// <summary>
@@ -67,8 +78,11 @@ namespace Tipper_Variant2
             {
                 throw new ParkingOverflowException();
             }
-
-            if (p._garages.Count < p._maxCount)
+            if (p._garages.Contains(car))
+            {
+                throw new ParkingAlreadyHaveException();
+            }
+            if (p._garages.Count < p._maxCount && !p._garages.Contains(car))
             {
                     p._garages.Add(car);
                     add_car = p._garages.Count;
@@ -160,6 +174,55 @@ namespace Tipper_Variant2
             }
             return _garages[index];
         }
+
+        /// <summary>
+        /// Сортировка автомобилей на парковке
+        /// </summary>
+        public void Sort() => _garages.Sort((IComparer<T>)new CarComparer());
+
+        /// <summary>
+        /// Метод интерфейса IEnumerator, вызываемый при удалении объекта
+        /// </summary>
+        public void Dispose()
+        {
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для перехода к следующему элементу или началу коллекции
+        /// </summary>
+        /// <returns></returns>
+        public bool MoveNext()
+        {
+            if (_currentIndex + 1 >= _garages.Count)
+            {
+                Reset();
+                return false;
+            }
+            _currentIndex++;
+            return true;
+
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для сброса и возврата к началу коллекции
+        /// </summary>
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
+        }
+
 
     }
 
